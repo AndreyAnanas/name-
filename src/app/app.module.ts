@@ -19,7 +19,7 @@ import { SidebarMainComponent } from './@theme/components/sidebar/sidebar.compon
 import { NewsComponent } from './pages/sections/news/news.component';
 import { AddNewsComponent } from './pages/sections/add-news/add-news.component';
 
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import { AddNewsComponent } from './pages/sections/add-news/add-news.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
