@@ -1,0 +1,24 @@
+<div class="admin-page__header">
+  <p>Администраторы</p>
+  <button (click)="onAddAdminBtn()">Добавить администратора</button>
+</div>
+
+<div class="admin-page__content">
+  <div class="admin-page__table-wrapper">
+    <app-table
+      [columnHeaders]="['ID', 'Логин', 'Активен', 'Дата рождения', 'Дата создания']"
+      [data]="admins"
+      (rowClick)="onAdminSelect($event)">
+    </app-table>
+  </div>
+
+  <aside class="admin-page__aside">
+    <!-- на потом крч -->
+    <!-- <app-add-admin-form *ngIf="asideIndex == 1" (adminAdded)="loadAdmins()" />
+    <app-edit-admin
+      *ngIf="asideIndex == 2"
+      [selectedAdmin]="selectedAdmin"
+      (adminUpdated)="loadAdmins()">
+    </app-edit-admin> -->
+  </aside>
+</div>

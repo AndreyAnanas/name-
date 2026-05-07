@@ -20,6 +20,8 @@ import { NewsComponent } from './pages/sections/news/news.component';
 import { AddNewsComponent } from './pages/sections/add-news/add-news.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { AdminListComponent } from './admin-list/admin-list.component';
+import { AdminService } from './domains/services/admin.service';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     MainPageComponent,
     NewsComponent,
     AddNewsComponent,
+    AdminListComponent,
 
 
 
@@ -44,7 +47,7 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
