@@ -20,7 +20,7 @@ import { NewsComponent } from './pages/sections/news/news.component';
 import { AddNewsComponent } from './pages/sections/add-news/add-news.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { AdminListComponent } from './admin-list/admin-list.component';
+import { AdminListComponent } from './modules/administration/pages/admin-list/admin-list.component';
 import { AdminService } from './domains/services/admin.service';
 
 @NgModule({
@@ -36,7 +36,6 @@ import { AdminService } from './domains/services/admin.service';
     MainPageComponent,
     NewsComponent,
     AddNewsComponent,
-    AdminListComponent,
 
 
 
