@@ -11,7 +11,12 @@
           ? 'var(--block-child-background)'
           : 'var(--block-background)'
       }">
-        <p>
+        <!-- Если это первая колонка (id или admin_id) - рисуем кружок -->
+        <div *ngIf="header === 'admin_id' || header === 'id'" class="circle">
+          {{ row[header] }}
+        </div>
+        <!-- Иначе просто текст -->
+        <p *ngIf="header !== 'admin_id' && header !== 'id'">
           {{ row[header] }}
         </p>
       </td>
