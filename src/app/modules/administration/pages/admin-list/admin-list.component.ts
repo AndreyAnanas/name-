@@ -16,7 +16,7 @@ export class AdminListComponent {
   }
 
   loadAdmins() {
-    this.adminService.getAdmins(true, 100, 0).subscribe({
+    this.adminService.getAdmins().subscribe({
       next: (res: any) => {
         this.admins = res.admins || res;
       },

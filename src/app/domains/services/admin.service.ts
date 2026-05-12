@@ -11,13 +11,15 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
-  getAdmins(includeInactive?: boolean, limit?: number, offset?: number) {
-    let params: any = {};
-    if (includeInactive !== undefined) params.include_inactive = includeInactive;
-    if (limit !== undefined) params.limit = limit;
-    if (offset !== undefined) params.offset = offset;
-    return this.http.get(this.api, { params });
-  }
+  getAdmins(includeInactive: boolean = true, limit: number = 100, offset: number = 0) {
+  return this.http.get(this.api, { 
+    params: { 
+      include_inactive: includeInactive,
+      limit: limit,
+      offset: offset
+    } 
+  });
+}
 
   getAdminById(id: number) {
     return this.http.get<Admin>(`${this.api}/${id}`);
