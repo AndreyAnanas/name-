@@ -13,6 +13,7 @@ import { AdminListComponent } from './pages/admin-list/admin-list.component';
 
 
 
+
 @NgModule({
   declarations: [
     AdminPageComponent,
@@ -20,7 +21,7 @@ import { AdminListComponent } from './pages/admin-list/admin-list.component';
     AdminListComponent,
     RizhiComponentComponent,
     AddUserFormComponent,
-    EditUserComponent
+    EditUserComponent,
   ],
 
   imports: [

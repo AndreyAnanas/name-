@@ -11,6 +11,13 @@ export class AdminListComponent {
   admins: any[] = [];
   selectedAdmin: any = null;
 
+   newAdmin = {
+    login: '',
+    password: '',
+    is_active: true,
+    birth_date: ''
+  };
+
   constructor(private adminService: AdminService) {
     this.loadAdmins();
   }
@@ -29,11 +36,26 @@ export class AdminListComponent {
   onAddAdminBtn() {
     this.asideIndex = 1;
     this.selectedAdmin = null;
-    // тут можно убрать выделение с таблицы, если нужно
+    this.newAdmin = { login: '', password: '', is_active: true, birth_date: '' };
   }
 
   onAdminSelect(admin: any) {
     this.asideIndex = 2;
     this.selectedAdmin = admin;
+  }
+  onSubmitAdmin() {
+    const data = {
+      admin_login: this.newAdmin.login,
+      admin_password: this.newAdmin.password,
+      is_active_admin: this.newAdmin.is_active,
+      admin_birth_date: this.newAdmin.birth_date || null
+    };
+    this.adminService.createAdmin(data).subscribe({
+      next: () => {
+        this.loadAdmins(); 
+        this.onAddAdminBtn();
+      },
+      error: (err) => console.error('Ошибка создания', err)
+    });
   }
 }

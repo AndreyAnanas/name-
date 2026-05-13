@@ -6,19 +6,35 @@
 <div class="admin-page__content">
   <div class="admin-page__table-wrapper">
     <app-table
-      [columnHeaders]="['ID', 'Логин', 'Активен', 'Дата рождения', 'Дата создания']"
+      [columnHeaders]="['id', 'Логин', 'Активен', 'Дата рождения', 'Дата создания']"
       [data]="admins"
       (rowClick)="onAdminSelect($event)">
     </app-table>
   </div>
 
   <aside class="admin-page__aside">
-    <!-- на потом крч -->
-    <!-- <app-add-admin-form *ngIf="asideIndex == 1" (adminAdded)="loadAdmins()" />
-    <app-edit-admin
-      *ngIf="asideIndex == 2"
-      [selectedAdmin]="selectedAdmin"
-      (adminUpdated)="loadAdmins()">
-    </app-edit-admin> -->
+    <!-- Форма добавления -->
+    <div class="form-container" *ngIf="asideIndex == 1">
+      <header>Добавить администратора</header>
+      <main>
+        <div class="form-group">
+          <label>Логин</label>
+          <input [(ngModel)]="newAdmin.login" placeholder="Введите логин" />
+        </div>
+        <div class="form-group">
+          <label>Пароль</label>
+          <input type="password" [(ngModel)]="newAdmin.password" placeholder="Введите пароль" />
+        </div>
+        <div class="form-group">
+          <label>Активен</label>
+          <input type="checkbox" [(ngModel)]="newAdmin.is_active" />
+        </div>
+        <div class="form-group">
+          <label>Дата рождения</label>
+          <input type="date" [(ngModel)]="newAdmin.birth_date" />
+        </div>
+        <button (click)="onSubmitAdmin()">Сохранить</button>
+      </main>
+    </div>
   </aside>
 </div>
