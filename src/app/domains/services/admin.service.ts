@@ -11,15 +11,9 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
-  getAdmins(includeInactive: boolean = true, limit: number = 100, offset: number = 0) {
-  return this.http.get(this.api, { 
-    params: { 
-      include_inactive: includeInactive,
-      limit: limit,
-      offset: offset
-    } 
-  });
-}
+  getAdmins() {
+  return this.http.get(this.api);
+  }
 
   getAdminById(id: number) {
     return this.http.get<Admin>(`${this.api}/${id}`);
