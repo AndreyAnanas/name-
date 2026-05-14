@@ -23,9 +23,20 @@ export class AdminService {
     return this.http.post(this.api, data);
   }
 
-  updateAdmin(id: number, data: any) {
-  return this.http.put(`/api/admins/${id}`, data);
-  }
+  updateAdmin(id: number, data: any): any {
+  const payload = {
+    admin_id: id,
+    admin_login: data.login,
+    // admin_password: data.password || "no_change",
+    // admin_password_hash: data.password_hash || "",
+    email: data.email,
+    role: data.role,
+    is_active_admin: data.is_active,
+    admin_birth_date: data.birth_date
+  };
+  console.log('Отправляем на бэкенд:', payload);
+  return this.http.post(this.api, payload);
+}
 
   deleteAdmin(id: number, hard: boolean = false) {
     return this.http.delete(`${this.api}/${id}`, { params: { hard } });

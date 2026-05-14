@@ -20,7 +20,7 @@ export class AdminEditComponent {
         this.saved.emit();
         this.closeModal();
       },
-      error: (err) => console.error('Ошибка', err)
+      error: (err: any) => console.error('Ошибка', err)
     });
   }
 
