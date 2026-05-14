@@ -17,10 +17,10 @@ export class TableComponent implements OnChanges {
     }
   }
 
-  onRowClick(user: any) {
+  onRowClick(user: any, index: number) {
     this.rowClick.emit(user);
 
-    let trs = document.querySelectorAll('tr')[user.userId]
+    let trs = document.querySelectorAll('tr')[index + 1]
     let ps = trs.querySelectorAll('p')
 
     for (let i = 0; i < this.data.length+1; i++){

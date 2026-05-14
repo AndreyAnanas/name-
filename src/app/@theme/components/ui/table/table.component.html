@@ -5,7 +5,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let row of data; let i = index" (click)="onRowClick(row)">
+    <tr *ngFor="let row of data; let i = index" (click)="onRowClick(row, i)">
       <td *ngFor="let header of dataKeys" [ngStyle]="{
         background: i % 2 === 0
           ? 'var(--block-child-background)'

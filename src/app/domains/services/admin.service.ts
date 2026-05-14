@@ -24,7 +24,7 @@ export class AdminService {
   }
 
   updateAdmin(id: number, data: any) {
-    return this.http.patch(`${this.api}/${id}`, data);
+  return this.http.put(`/api/admins/${id}`, data);
   }
 
   deleteAdmin(id: number, hard: boolean = false) {

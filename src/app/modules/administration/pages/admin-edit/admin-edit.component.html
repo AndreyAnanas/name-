@@ -1,0 +1,22 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <h3>Редактировать админа</h3>
+    
+    <label>Логин:</label>
+    <input [(ngModel)]="admin.login" type="text">
+    
+    <label>Email:</label>
+    <input [(ngModel)]="admin.email" type="email">
+    
+    <label>Роль:</label>
+    <select [(ngModel)]="admin.role">
+      <option value="admin">admin</option>
+      <option value="super_admin">super_admin</option>
+    </select>
+    
+    <div class="modal-buttons">
+      <button (click)="saveAdmin()">Сохранить</button>
+      <button (click)="closeModal()">Отмена</button>
+    </div>
+  </div>
+</div>
