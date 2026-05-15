@@ -11,12 +11,18 @@
           ? 'var(--block-child-background)'
           : 'var(--block-background)'
       }">
+        <!-- Если это колонка с действиями - рисуем кнопку -->
+        <div *ngIf="header === 'actions'" class="action-cell">
+          <button class="delete-btn" (click)="$event.stopPropagation(); onDelete(row)">🗑️</button>
+        </div>
+        
         <!-- Если это первая колонка (id или admin_id) - рисуем кружок -->
-        <div *ngIf="header === 'admin_id' || header === 'id'" class="circle">
+        <div *ngIf="header !== 'actions' && (header === 'admin_id' || header === 'id')" class="circle">
           {{ row[header] }}
         </div>
+        
         <!-- Иначе просто текст -->
-        <p *ngIf="header !== 'admin_id' && header !== 'id'">
+        <p *ngIf="header !== 'actions' && header !== 'admin_id' && header !== 'id'">
           {{ row[header] }}
         </p>
       </td>

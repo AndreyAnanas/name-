@@ -9,8 +9,11 @@ export class TableComponent implements OnChanges {
   @Input() columnHeaders: string[] = [];
   @Input() data: any[] = [];
   @Output() rowClick = new EventEmitter<any>();
+  @Output() deleteRow = new EventEmitter<any>();
   dataKeys: string[] = [];
-
+  onDelete(row: any) {
+    this.deleteRow.emit(row);
+  }
   ngOnChanges() {
     if (this.data.length > 0) {
       this.dataKeys = Object.keys(this.data[0]);

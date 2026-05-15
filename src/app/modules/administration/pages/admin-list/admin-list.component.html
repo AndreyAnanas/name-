@@ -6,9 +6,10 @@
 <div class="admin-page__content">
   <div class="admin-page__table-wrapper">
     <app-table
-      [columnHeaders]="['ID', 'Логин', 'Email', 'Роль', 'Активен', 'Дата рождения', 'Дата создания']"
-      [data]="admins"
-      (rowClick)="onAdminSelect($event)">
+      [columnHeaders]="['ID', 'Логин', 'Email', 'Роль', 'Активен', 'Дата рождения', 'Дата создания', 'Действия']"
+      [data]="adminsWithActions"
+      (rowClick)="onAdminSelect($event)"
+      (deleteRow)="onDeleteAdmin($event)">
     </app-table>
   </div>
 

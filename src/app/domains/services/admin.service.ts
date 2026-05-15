@@ -12,33 +12,32 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   getAdmins() {
-  return this.http.get(this.api);
+  return this.http.get(this.api, { withCredentials: true });
   }
 
   getAdminById(id: number) {
-    return this.http.get<Admin>(`${this.api}/${id}`);
+    return this.http.get<Admin>(`${this.api}/${id}`, { withCredentials: true });
   }
 
-  createAdmin(data: any) {
-    return this.http.post(this.api, data);
+  createAdmin(data: any) {  
+    return this.http.post(this.api, data, { withCredentials: true });
   }
 
-  updateAdmin(id: number, data: any): any {
-  const payload = {
-    admin_id: id,
-    admin_login: data.login,
-    // admin_password: data.password || "no_change",
-    // admin_password_hash: data.password_hash || "",
-    email: data.email,
-    role: data.role,
-    is_active_admin: data.is_active,
-    admin_birth_date: data.birth_date
-  };
-  console.log('Отправляем на бэкенд:', payload);
-  return this.http.post(this.api, payload);
+  updateAdmin(id: number, data: any) {
+  // Отправляем только те поля, которые реально можно обновить
+  const payload: any = {};
+  
+  if (data.admin_login) payload.admin_login = data.admin_login;
+  if (data.is_active !== undefined) payload.is_active_admin = data.is_active;
+  if (data.admin_birth_date) payload.admin_birth_date = data.admin_birth_date;
+  
+  return this.http.patch(`${this.api}/${id}`, data, { withCredentials: true });
 }
 
-  deleteAdmin(id: number, hard: boolean = false) {
-    return this.http.delete(`${this.api}/${id}`, { params: { hard } });
+ deleteAdmin(id: number, hard: boolean = false) {
+    return this.http.delete(`${this.api}/${id}`, { 
+      params: { hard },
+      withCredentials: true 
+    });
   }
 }

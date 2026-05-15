@@ -89,33 +89,19 @@ export class AdminListComponent {
   onUpdateAdmin() {
   const adminId = this.selectedAdmin.admin_id || this.selectedAdmin.id;
   
-  console.log('ID админа для обновления:', adminId);
-  console.log('Список админов:', this.admins);
-
-  const adminFromList = this.admins.find(a => (a.admin_id || a.id) === adminId);
+  const updateData: any = {};
   
-  if (!adminFromList) {
-    console.error('Админ не найден в списке!');
-    alert('Ошибка: не удалось найти админа в списке');
-    return;
+  if (this.selectedAdmin.admin_login || this.selectedAdmin.login) {
+    updateData.admin_login = this.selectedAdmin.admin_login || this.selectedAdmin.login;
   }
   
-  console.log('Найденный админ из списка:', adminFromList);
+  if (this.selectedAdmin.is_active !== undefined) {
+    updateData.is_active = this.selectedAdmin.is_active;
+  }
   
-  // Берём пароль из найденного админа (хеш)
-  const existingPassword = adminFromList.admin_password || adminFromList.admin_password_hash || "";
-
-  const updateData = {
-    admin_id: adminId,
-    admin_login: this.selectedAdmin.admin_login || this.selectedAdmin.login,
-    admin_password: existingPassword,  // ← отправляем существующий пароль
-    email: this.selectedAdmin.email,
-    role: this.selectedAdmin.role,
-    is_active_admin: (this.selectedAdmin.is_active_admin ?? this.selectedAdmin.is_active) ? 1 : 0,
-    admin_birth_date: this.selectedAdmin.admin_birth_date || this.selectedAdmin.birth_date
-  };
-  
-  console.log('Отправляем на бэкенд:', updateData);
+  if (this.selectedAdmin.admin_birth_date || this.selectedAdmin.birth_date) {
+    updateData.admin_birth_date = this.selectedAdmin.admin_birth_date || this.selectedAdmin.birth_date;
+  }
 
   this.adminService.updateAdmin(adminId, updateData).subscribe({
     next: (res: any) => {
@@ -128,5 +114,27 @@ export class AdminListComponent {
       alert('Ошибка при обновлении админа!');
     }
   });
+}
+get adminsWithActions() {
+  return this.admins.map(admin => ({
+    ...admin,
+    actions: `<button class="delete-btn" data-id="${admin.id}">🗑️</button>`
+  }));
+}
+onDeleteAdmin(admin: any) {
+  const adminId = admin.admin_id || admin.id;
+  const adminName = admin.admin_login || admin.login;
+  
+  if (confirm(`Удалить админа "${adminName}"?`)) {
+    this.adminService.deleteAdmin(adminId).subscribe({
+      next: () => {
+        this.loadAdmins();
+      },
+      error: (err) => {
+        console.error('Ошибка удаления', err);
+        alert('Не удалось удалить админа');
+      }
+    });
+  }
 }
 }
